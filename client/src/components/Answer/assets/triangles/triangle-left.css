@@ -1,0 +1,305 @@
+/*left small*/
+.answer-triangle__left_small {
+    left: -53.5px;
+    z-index: 4;
+    border: 23px solid transparent;
+    border-right: 33px solid #D0D0D8;
+}
+
+.answer-triangle__left_small:after {
+    display: block;
+    z-index: 5;
+    content: "";
+    border: 23px solid transparent;
+    border-right: 34px solid rgb(255, 255, 255);
+    position: absolute;
+    left: -51.5px;
+    top: -23px;
+    width: 30px;
+}
+
+
+
+.answer.answer_next:hover .answer-triangle__left_small {
+    border-right: 33px solid #D0D0D8;
+}
+
+.triangle-left-line {
+    position: absolute;
+    width: 17px;
+    height: 1px;
+    top: 23px;
+    left: -46px;
+    background-color: #D0D0D8;
+}
+
+.triangle-left-line_prev {
+    position: absolute;
+    width: 69px;
+    height: 1px;
+    top: 23px;
+    left: -98px;
+    background-color: #D0D0D8;
+}
+
+.triangle-left-line_active {
+    position: absolute;
+    width: 69px;
+    height: 1px;
+    top: 23px;
+    left: -98px;
+    background-color: #2869E8CC;
+}
+
+.triangle-left-line_wrong {
+    background-color: #EC5974;
+}
+
+.triangle-left-line_correct {
+    background-color: #51B366;
+}
+
+.triangle-left-line_selected {
+    background-color: #2869E8CC;
+}
+
+.triangle-left-line_active ~ .answer-triangle__left_small {
+    border-right: 33px solid #2869E8CC;
+}
+
+.answer:hover .triangle-left-line {
+    background-color: #2869E8CC;
+}
+
+/*left standart*/
+.answer-triangle__left_standart {
+    z-index: 8;
+    border: 30px solid transparent;
+    border-right: 34px solid #D0D0D8;
+    left: -61.5px;
+}
+
+.answer-triangle__left_standart:after {
+    display: block;
+    z-index: 9;
+    content: "";
+    border: 32px solid transparent;
+    border-right: 35px solid rgb(255, 255, 255);
+    position: absolute;
+    left: -134.5px;
+    top: -32px;
+    width: 105px;
+}
+
+
+.triangle-left-line-answer {
+    position: absolute;
+    width: 17px;
+    height: 1px;
+    top: 33px;
+    left: -47px;
+    background-color: #D0D0D8;
+}
+
+.triangle-left-line-answer_correct {
+    position: absolute;
+    width: 17px;
+    height: 1px;
+    top: 33px;
+    left: -47px;
+    background-color: #51B366;
+}
+
+.triangle-left-line-answer_selected {
+    position: absolute;
+    width: 17px;
+    height: 1px;
+    top: 33px;
+    left: -47px;
+    background-color: #2869E8CC;
+}
+
+.triangle-left-line-answer_wrong {
+    position: absolute;
+    width: 17px;
+    height: 1px;
+    top: 33px;
+    left: -47px;
+    background-color: #EC5974;
+}
+
+.answer:hover .triangle-left-line-answer {
+    background-color: #2869E8CC;
+}
+
+.answer:hover .triangle-left-line-answer_correct {
+    background-color: #2869E8CC;
+}
+.answer:hover .triangle-left-line-answer_selected {
+    background-color: #2869E8CC;
+}
+.answer:hover .triangle-left-line-answer_wrong {
+    background-color: #2869E8CC;
+}
+/*left small correct*/
+.answer-triangle__left_small_correct {
+    border-right: 33px solid #51B366;
+}
+
+.answer-triangle__left_small_correct:before {
+    display: block;
+    z-index: 15;
+    content: "";
+    border: 23px solid transparent;
+    border-right: 34px solid #51B3660D;
+    position: absolute;
+    right: -35px;
+    top: -23px;
+    width: 30px;
+}
+
+/*left standart correct*/
+.answer-triangle__left_standart_correct {
+    border-right: 34px solid #51B366;
+}
+
+.answer-triangle__left_standart_correct:before {
+    display: block;
+    z-index: 21;
+    content: "";
+    border: 32px solid transparent;
+    border-right: 35px solid #51B3660D;
+    position: absolute;
+    left: -134.5px;
+    top: -32px;
+    width: 105px;
+}
+
+/*left small wrong*/
+.answer-triangle__left_small_wrong {
+    border-right: 33px solid #EC5974;
+}
+
+.answer-triangle__left_small_wrong:before {
+    display: block;
+    z-index: 17;
+    content: "";
+    border: 23px solid transparent;
+    border-right: 34px solid #EC59740D;
+    position: absolute;
+    right: -35px;
+    top: -23px;
+    width: 30px;
+}
+
+/*left standart wrong*/
+.answer-triangle__left_standart_wrong {
+    border-right: 34px solid #EC5974;
+}
+
+.answer-triangle__left_standart_wrong:before {
+    display: block;
+    z-index: 21;
+    content: "";
+    border: 32px solid transparent;
+    border-right: 35px solid #EC59740D;
+    position: absolute;
+    left: -134.5px;
+    top: -32px;
+    width: 105px;
+}
+
+/*left small selected*/
+.answer-triangle__left_small_selected {
+    border-right: 33px solid #2869E8CC;
+}
+
+.answer-triangle__left_small_selected:before {
+    display: block;
+    z-index: 19;
+    content: "";
+    border: 23px solid transparent;
+    border-right: 34px solid #2869E866;
+    position: absolute;
+    right: -35px;
+    top: -23px;
+    width: 30px;
+}
+
+/*left standart selected*/
+.answer-triangle__left_standart_selected {
+    border-right: 34px solid #2869E8CC;
+}
+
+.answer-triangle__left_standart_selected:before {
+    display: block;
+    z-index: 21;
+    content: "";
+    border: 32px solid transparent;
+    border-right: 35px solid #2869E866;
+    position: absolute;
+    left: -134.5px;
+    top: -32px;
+    width: 105px;
+}
+
+/*left small hover*/
+.answer:hover .answer-triangle__left_small {
+    display: block;
+    z-index: 11;
+    border: 23px solid transparent;
+    border-right: 33px solid #2869E8CC;
+    position: absolute;
+    left: -53.5px;
+    cursor: pointer;
+}
+
+.answer_inactive:hover .answer-triangle__left_small {
+    border-right: 33px solid #D0D0D8;  
+}
+
+.answer.answer_inactive:hover .answer-triangle__left_small{
+    cursor: not-allowed;
+}
+
+.answer.answer_active:hover .answer-triangle__left_small{
+    cursor: default;
+}
+
+.answer.answer_next:hover .answer-triangle__left_small{
+    cursor: default;
+}
+
+.answer:hover .answer-triangle__left_small_selected:before{
+    border-right: 34px solid #FFFFFF;
+}
+
+.answer:hover .answer-triangle__left_small_wrong:before{
+    border-right: 34px solid #FFFFFF;
+}
+
+.answer:hover .answer-triangle__left_small_correct:before{
+    border-right: 34px solid #FFFFFF;
+}
+
+/*left standart hover*/
+.answer:hover .answer-triangle__left_standart {
+    display: block;
+    z-index: 13;
+    border: 30px solid transparent;
+    border-right: 34px solid #2869E8CC;
+    position: absolute;
+    left: -61.5px;
+}
+
+.answer:hover .answer-triangle__left_standart_selected:before{
+    border-right: 37px solid #FFFFFF;
+}
+
+.answer:hover .answer-triangle__left_standart_wrong:before{
+    border-right: 37px solid #FFFFFF;
+}
+
+.answer:hover .answer-triangle__left_standart_correct:before{
+    border-right: 37px solid #FFFFFF;
+}

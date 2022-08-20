@@ -1,0 +1,7 @@
+Answer Component doc
+props 
+sum: cash prize (if component using in game levels)
+question: question from the game
+state: correct/selected/wrong/inactive/active/next
+size: small/standart
+position: if component using as answer with alphabet letters 

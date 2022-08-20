@@ -1,0 +1,316 @@
+/*right small style*/
+.answer-triangle__right_small {
+    z-index: 2;
+    border: 23px solid transparent;
+    border-left: 33px solid #D0D0D8;
+    right: -52.5px;
+}
+
+.answer-triangle__right_small:after {
+    display: block;
+    z-index: 3;
+    content: "";
+    border: 23px solid transparent;
+    border-left: 33px solid rgb(255, 255, 255);
+    position: absolute;
+    right: -51.5px;
+    top: -23px;
+    width: 30px;
+}
+
+/*right standart style*/
+.answer-triangle__right_standart {
+    z-index: 6;
+    border: 30px solid transparent;
+    border-left: 34px solid #D0D0D8;
+    right: -61.5px;
+}
+
+.answer-triangle__right_standart:after {
+    display: block;
+    z-index: 7;
+    content: "";
+    border: 32px solid transparent;
+    border-left: 35px solid rgb(255, 255, 255);
+    position: absolute;
+    right: -134.5px;
+    top: -32px;
+    width: 105px;
+}
+
+
+.triangle-right-line {
+    position: absolute;
+    width: 17px;
+    height: 1px;
+    top: 23px;
+    right: -46px;
+    background-color: #D0D0D8;
+}
+
+.triangle-right-line_prev {
+    position: absolute;
+    width: 69px;
+    height: 1px;
+    top: 23px;
+    right: -98px;
+    background-color: #D0D0D8;
+}
+
+.triangle-right-line_active ~ .answer-triangle__right_small {
+    border-left: 33px solid #2869E8CC;
+}
+
+.triangle-right-line_inactive {
+    position: absolute;
+    width: 69px;
+    height: 1px;
+    top: 23px;
+    left: -98px;
+    background-color: #D0D0D8;
+}
+
+.triangle-right-line_active {
+    position: absolute;
+    width: 69px;
+    height: 1px;
+    top: 23px;
+    right: -98px;
+    background-color: #2869E8CC;
+}
+
+.triangle-right-line_wrong {
+    background-color: #EC5974;
+}
+
+.triangle-right-line_correct {
+    background-color: #51B366;
+}
+
+.triangle-right-line_selected {
+    background-color: #2869E8CC;
+}
+
+.answer.answer_next:hover .answer-triangle__right_small {
+    border-left: 33px solid #D0D0D8;
+}
+.answer:hover .triangle-right-line{
+    background-color: #2869E8CC;
+}
+
+.answer.answer_inactive:hover .answer-triangle__right_small {
+    cursor: not-allowed;
+}
+.answer.answer_active:hover .answer-triangle__right_small {
+    cursor: default;
+}
+.answer.answer_next:hover .answer-triangle__right_small {
+    cursor: default;
+}
+
+.triangle-right-line-answer {
+    position: absolute;
+    width: 17px;
+    height: 1px;
+    top: 33px;
+    right: -47px;
+    background-color: #D0D0D8;
+}
+
+.triangle-right-line-answer_correct {
+    position: absolute;
+    width: 17px;
+    height: 1px;
+    top: 33px;
+    right: -47px;
+    background-color: #51B366;
+}
+
+.triangle-right-line-answer_selected {
+    position: absolute;
+    width: 17px;
+    height: 1px;
+    top: 33px;
+    right: -47px;
+    background-color: #2869E8CC;
+}
+
+.triangle-right-line-answer_wrong {
+    position: absolute;
+    width: 17px;
+    height: 1px;
+    top: 33px;
+    right: -47px;
+    background-color: #EC5974; 
+}
+
+.answer:hover .triangle-right-line-answer {
+    background-color: #2869E8CC;
+}
+
+.answer:hover .triangle-right-line-answer_correct {
+    background-color: #2869E8CC;
+}
+.answer:hover .triangle-right-line-answer_selected {
+    background-color: #2869E8CC;
+}
+.answer:hover .triangle-right-line-answer_wrong {
+    background-color: #2869E8CC;
+}
+
+/*right small selected style*/
+.answer-triangle__right_small_selected {
+    border-left: 33px solid #2869E8CC;
+}
+
+.answer-triangle__right_small_selected:before {
+    display: block;
+    z-index: 18;
+    content: "";
+    border: 23px solid transparent;
+    border-left: 34px solid #2869E866;
+    position: absolute;
+    right: -52.5px;
+    top: -23px;
+    width: 30px;
+}
+
+/*right standard selected style*/
+.answer-triangle__right_standart_selected {
+    border-left: 34.5px solid #2869E8CC;
+}
+
+.answer-triangle__right_standart_selected:before {
+    display: block;
+    z-index: 20;
+    content: "";
+    border: 32px solid transparent;
+    border-left: 35px solid #2869E866;
+    position: absolute;
+    left: -37.5px;
+    top: -32px;
+    width: 105px;
+}
+/*right standart selected hover*/
+.answer:hover .answer-triangle__right_standart_selected {
+    border-left: 34px solid #FFFFFF;
+}
+
+/* right small wrong style */
+.answer-triangle__right_small_wrong {
+    border-left: 33px solid #EC5974;
+}
+
+.answer-triangle__right_small_wrong:before {
+    display: block;
+    z-index: 16;
+    content: "";
+    border: 23px solid transparent;
+    border-left: 34px solid #EC59740D;
+    position: absolute;
+    left: -35px;
+    top: -23px;
+    width: 30px;
+}
+
+/* right standart wrong style */
+.answer-triangle__right_standart_wrong {
+    border-left: 34.5px solid #EC5974;
+}
+
+.answer-triangle__right_standart_wrong:before {
+    display: block;
+    z-index: 20;
+    content: "";
+    border: 32px solid transparent;
+    border-left: 35px solid #EC59740D;
+    position: absolute;
+    left: -37.5px;
+    top: -32px;
+    width: 105px;
+}
+
+/*right small correct style*/
+
+.answer-triangle__right_small_correct {
+    border-left: 33px solid #51B366;
+}
+
+.answer-triangle__right_small_correct:before {
+    display: block;
+    z-index: 14;
+    content: "";
+    border: 23px solid transparent;
+    border-left: 34px solid #51B3660D;
+    position: absolute;
+    left: -35px;
+    top: -23px;
+    width: 30px;
+}
+
+.answer:hover .answer-triangle__right_small_correct:before {
+    border-left: 34px solid #FFFFFF;
+}
+
+/*right standart correct style*/
+
+.answer-triangle__right_standart_correct {
+    border-left: 34.5px solid #51B366;
+}
+
+.answer-triangle__right_standart_correct:before {
+    display: block;
+    z-index: 20;
+    content: "";
+    border: 32px solid transparent;
+    border-left: 35px solid #51B3660D;
+    position: absolute;
+    left: -37.5px;
+    top: -32px;
+    width: 105px;
+}
+
+/*right small hover*/
+.answer:hover .answer-triangle__right_small {
+    display: block;
+    z-index: 10;
+    border: 23px solid transparent;
+    border-left: 33px solid #2869E8CC;
+    position: absolute;
+    right: -52.5px;
+    cursor: pointer;
+}
+
+.answer_inactive:hover .answer-triangle__right_small {
+    border-left: 33px solid #D0D0D8;
+}
+
+.answer:hover .answer-triangle__right_small_selected:before{
+    border-left: 33px solid #FFFFFF;
+}
+
+.answer:hover .answer-triangle__right_small_wrong:before{
+    border-left: 33px solid #FFFFFF;
+}
+
+/*right standart hover*/
+.answer:hover .answer-triangle__right_standart {
+    display: block;
+    z-index: 12;
+    border: 30px solid transparent;
+    border-left: 34px solid #2869E8CC;
+    position: absolute;
+    right: -61.5px;
+}
+
+.answer:hover .answer-triangle__right_standart_selected:before{
+    border-left: 33px solid #FFFFFF;
+}
+
+.answer:hover .answer-triangle__right_standart_wrong:before{
+    border-left: 33px solid #FFFFFF;
+}
+
+.answer:hover .answer-triangle__right_standart_correct:before{
+    border-left: 33px solid #FFFFFF;
+}

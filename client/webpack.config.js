@@ -2,7 +2,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
-
+const ErrorOverlayPlugin = require('error-overlay-webpack-plugin')
 const path = require("path");
 const fs = require("fs");
 
@@ -44,7 +44,7 @@ module.exports = (env, argv) => {
       resolve: {
         extensions: [".ts", ".js", '.jsx']
       },
-      devtool: isEnvDevelopment ? "eval-cheap-module-source-map" : "source-map",
+      devtool: isEnvDevelopment ? "cheap-module-source-map" : "source-map",
         module: {
         rules: [
             {
@@ -78,6 +78,7 @@ module.exports = (env, argv) => {
         },
         plugins: [
             new CleanWebpackPlugin(),
+            new ErrorOverlayPlugin(),
             new MiniCssExtractPlugin({
             filename: `styles/styles.[hash].min.css`
             }),

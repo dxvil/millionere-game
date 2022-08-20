@@ -1,0 +1,107 @@
+/*answer style*/
+.answer {
+    position:relative;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    box-sizing: border-box;
+    margin: 50px;
+    width: 200px;
+    border: 1px solid #D0D0D8;
+}
+
+.answer_small {
+    height: 50px;
+    border-radius: 11px;
+}
+
+.answer_standart {
+    height: 70px;
+    border-radius: 15px;
+}
+
+.answer_selected {
+    background: #2869E866;
+    border: 1px solid #2869E8CC ;
+}
+
+.answer_wrong {
+    background: #EC59740D;
+    border: 1px solid #EC5974 ;
+}
+
+.answer_correct {
+    background-color: #51B3660D;
+    border: 1px solid #51B366 ;
+}
+
+.answer_inactive {
+    color: #D0D0D8;
+    font-weight: bold;
+}
+
+.answer_active {
+    border: 1px solid #2869E8CC;
+    font-weight: bold;
+}
+
+.answer:hover  {
+    border: 1px solid #2869E8CC;
+    background: #FFFFFF;
+    cursor: pointer;
+}
+
+.answer_inactive:hover {
+    cursor: not-allowed;
+    border: 1px solid #D0D0D8;
+}
+
+.answer_active:hover {
+    cursor: default;
+}
+
+.answer_next:hover {
+    cursor: default;
+    border: 1px solid #D0D0D8;
+}
+
+/*answer components style*/
+.answer-triangle {
+    position: absolute;
+    display: block;
+}
+
+.answer-letter {
+    display: inline-block;
+    margin: 24.5px 8px 24.5px 32px;
+    font-size: 1em;
+    font-weight: bolder;
+    color: rgba(40, 105, 232, 0.8);
+}
+
+.answer-value {
+    display: inline-block;
+    width: 50%;
+    font-size: 1em;
+    color: #1C1C21;
+}
+
+.answer_inactive .answer-value {
+    width: 100%;
+    text-align: center;
+    color: #D0D0D8;
+}
+
+.answer_active .answer-value {
+    width: 100%;
+    text-align: center;
+    color: #2869E8CC;
+}
+
+.answer_next .answer-value{
+    width: 100%;
+    text-align: center;
+}
