@@ -63,7 +63,27 @@ module.exports = (env, argv) => {
                   }
                 ],
                 exclude: "/node_modules"
-              },
+            },
+            {
+                test: /\.(png|jp(e*)g|svg|gif)$/,
+                use: [
+                  {
+                    loader: 'file-loader',
+                    options: {
+                      name: './src/assets/images/[hash]-[name].[ext]',
+                      outputPath: "assets/images"
+                    },
+                  },
+                ],
+            },
+            {
+                test: /\.svg$/i,
+                use: [
+                  {
+                    loader: 'url-loader',
+                  },
+                ],
+            },
             {
                 test: /\.(js|jsx)$/,
                 loader: "babel-loader",
@@ -85,8 +105,8 @@ module.exports = (env, argv) => {
             new CopyPlugin({
             patterns: [
                 {
-                from: "./src/assets/img",
-                to: "assets/img",
+                from: "./src/assets/images",
+                to: "assets/images",
                 noErrorOnMissing: true
                 }
             ]

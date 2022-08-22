@@ -1,0 +1,28 @@
+.game-btn {
+    max-width: 100%;
+    width: 296px;
+    height: 64px;
+    border-radius: 16px;
+    border: none;
+    background-color: #2869E8CC;
+    color: #FFFFFF;
+    font-size: 1em;
+    font-weight: bolder;
+}
+
+.game-btn:hover {
+    background-color:#2869E899;
+    cursor: pointer;
+}
+
+.game-btn:focus {
+    background-color:#2869E8;
+}
+
+@media screen and (max-width: 480px) and (min-width: 320px) {
+    .game-btn {
+        width: 288px;
+        height: 48px;
+        border-radius: 8px;
+    }
+}

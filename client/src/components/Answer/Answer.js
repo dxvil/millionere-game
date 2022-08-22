@@ -36,7 +36,7 @@ const onStateClass = (state) => {
 }
 
 export const Answer = ({sum, question, position, size, state}) => {
-    const [letter, setLetter] = useState("")
+    const [letter, setLetter] = useState("A")
     const [answerSizeClass, setAnswerSizeClass] = useState("answer_standart")
     const [answerStateClass, setAnswerStateClass] = useState("")
 
@@ -258,7 +258,6 @@ const AnswerTriangle = ({size, state, side, sum = ""}) => {
     useEffect(() => {
     if(sum) {
         let [sumStyles] = answerTringleState[size][side][sum];
-        console.log(sumStyles);
         setSumStyle(sumStyles)
     }
     }, [sum])
