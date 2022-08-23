@@ -4,7 +4,7 @@ import { Answer } from "../components/Answer/Answer";
 export const AnswerComponentReview = () => {
     return(
         <div style={{padding: "50px"}}>
-            <Answer sum="sum_prev" 
+            <Answer
             question="3000$" 
             state="next"
             size="small"/>
@@ -12,7 +12,7 @@ export const AnswerComponentReview = () => {
             question="2000$" 
             state="active"
             size="small"/>
-            <Answer sum="sum_prev" 
+            <Answer
             question="1000$" 
             state="inactive"
             size="small"/>

@@ -119,6 +119,16 @@
             "White, grey, black"
         ],
         "correct" : 0
+    },
+    {
+        "question" : "What are the three primary colors?",
+        "content" : [
+            "Bla, Bla",
+            "Magenta, Magenta",
+            "salmon, salmon, salmon",
+            "White, grey, black"
+        ],
+        "correct" : [0, 1, 2]
     }
 ]
 }

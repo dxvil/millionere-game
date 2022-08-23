@@ -35,10 +35,24 @@ const onStateClass = (state) => {
     }
 }
 
-export const Answer = ({sum, question, position, size, state}) => {
+const sumStates = ["active", "inactive", "next"]
+
+const onClickAnswer = (sumStates, state) => {
+    if((!sumStates.includes(state)) && (state !== "selected")) {
+        return "selected"
+    }
+    return state;
+}
+
+export const Answer = ({sum, question, disabled, position, size, state, onSelectAnswer}) => {
     const [letter, setLetter] = useState("A")
     const [answerSizeClass, setAnswerSizeClass] = useState("answer_standart")
     const [answerStateClass, setAnswerStateClass] = useState("")
+    const [answerState, setAnswerState] = useState()
+
+    useEffect(() => {
+        setAnswerState(state)
+    }, [state])
 
     useEffect(() => {
         if(position) {
@@ -52,23 +66,34 @@ export const Answer = ({sum, question, position, size, state}) => {
     }, [size])
 
     useEffect(() => {
-        if(state){
-            let answerState = onStateClass(state)
-            setAnswerStateClass(answerState)
+        if(answerState){
+            let answState = onStateClass(answerState)
+            setAnswerStateClass(answState)
         }
-    }, [state])
+    }, [answerState])
 
-    return(
-        <div id="answer" className={`answer ${answerSizeClass} ${answerStateClass}`}>
-            <AnswerTriangle sum={sum} size={size} side="left" state={state}/>
-            <AnswerTriangle sum={sum} size={size} side="right" state={state}/>
-            {letter && <span className="answer-letter">{letter}</span>}
-            <span className="answer-value">{question}</span>
-        </div>
-    )
+    const onClick = () => {
+        onSelectAnswer(position)
+        setAnswerState(onClickAnswer(sumStates, state))
+    }
+
+    if(answerState) {
+        return(
+            <button id="answer"
+            disabled={disabled}
+            onClick={() => onClick()}
+            className={`answer ${answerSizeClass} ${answerStateClass}`}>
+                <AnswerTriangle sum={sum} size={size} side="left" state={answerState}/>
+                <AnswerTriangle sum={sum} size={size} side="right" state={answerState}/>
+                {letter && !sum && <span className="answer-letter">{letter}</span>}
+                <span className="answer-value">{question ?? sum}</span>
+            </button>
+        )
+    }
+   return null;
 }
 
-const AnswerTriangle = ({size, state, side, sum = ""}) => {
+const AnswerTriangle = ({size, state, side}) => {
     const answerTringleState = {
         "small": {
             "left": {
@@ -91,7 +116,7 @@ const AnswerTriangle = ({size, state, side, sum = ""}) => {
                     "answer-triangle__left_small_correct",
                 ],
                 "inactive": [
-                    "triangle-left-line",
+                    "triangle-left-line_prev",
                     "answer_inactive",
                     "answer-triangle__left_small",
                     ""
@@ -103,29 +128,11 @@ const AnswerTriangle = ({size, state, side, sum = ""}) => {
                     ""
                 ],
                 "next": [
-                    "triangle-left-line",
+                    "triangle-left-line_next",
                     "answer_next",
                     "answer-triangle__left_small",
                     ""
                 ],
-                "sum_prev": [
-                    "triangle-left-line_prev",
-                    "",
-                    "triangle-sum_prev",
-                    ""
-                ],
-                "sum_current": [
-                    "triangle-left-line_current",
-                    "",
-                    "triangle-sum_current",
-                    ""
-                ],
-                "sum_next": [
-                    "triangle-left-line_next",
-                    "",
-                    "triangle-sum_next",
-                    ""
-                ], 
                 "default": [
                     "triangle-left-line",
                     "",
@@ -153,7 +160,7 @@ const AnswerTriangle = ({size, state, side, sum = ""}) => {
                     "answer-triangle__right_small_correct",
                 ],
                 "inactive": [
-                    "triangle-right-line_prev",
+                    "triangle-right-line_inactive",
                     "",
                     "answer-triangle__right_small",
                     ""
@@ -168,12 +175,6 @@ const AnswerTriangle = ({size, state, side, sum = ""}) => {
                     "triangle-right-line_next",
                     "",
                     "answer-triangle__right_small",
-                    ""
-                ],
-                "sum_prev": [
-                    "triangle-right-line_prev",
-                    "",
-                    "triangle-sum_next",
                     ""
                 ],
                 "default": [
@@ -253,19 +254,11 @@ const AnswerTriangle = ({size, state, side, sum = ""}) => {
         }
     }
     const [linePosition, lineStyle, triangleStyle, triangleStateStyle] = answerTringleState[size][side][state]
-    const [sumStyle, setSumStyle] = useState("")
 
-    useEffect(() => {
-    if(sum) {
-        let [sumStyles] = answerTringleState[size][side][sum];
-        setSumStyle(sumStyles)
-    }
-    }, [sum])
-    
     return(
         <>
-        <div className={`${sumStyle} ${!sumStyle && lineStyle} ${!sumStyle && linePosition}`}/>
-         <div 
+        <div className={`${lineStyle} ${linePosition}`}/>
+        <div 
         className={`answer-triangle ${triangleStyle} ${triangleStateStyle}`} 
         />
         </>

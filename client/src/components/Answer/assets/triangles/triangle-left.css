@@ -42,6 +42,15 @@
     background-color: #D0D0D8;
 }
 
+.triangle-left-line_next {
+    position: absolute;
+    width: 69px;
+    height: 1px;
+    top: 23px;
+    left: -98px;
+    background-color: #D0D0D8;
+}
+
 .triangle-left-line_active {
     position: absolute;
     width: 69px;
@@ -255,6 +264,10 @@
 }
 
 .answer_inactive:hover .answer-triangle__left_small {
+    border-right: 33px solid #D0D0D8;  
+}
+
+.answer_inactive:hover .triangle-left-line {
     border-right: 33px solid #D0D0D8;  
 }
 
