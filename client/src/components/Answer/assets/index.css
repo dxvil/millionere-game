@@ -1,3 +1,7 @@
+:root {
+    --main-bg-color: #E5E5E5;
+}
+
 /*answer style*/
 .answer {
     position:relative;
@@ -13,6 +17,16 @@
     border: 1px solid #D0D0D8;
 }
 
+.answer:after {
+    content: "";
+    position: absolute;
+    box-sizing: border-box;
+    margin: 50px;
+    width: 200px;
+    z-index: -1;
+    background-color: var(--main-bg-color);
+}
+
 .answer_small {
     height: 50px;
     border-radius: 11px;
@@ -24,17 +38,17 @@
 }
 
 .answer_selected {
-    background: #6c9eff7a;
+    background: #2869E866;;
     border: 1px solid #2869E8CC ;
 }
 
 .answer_wrong {
-    background: #EC59740D;
-    border: 1px solid #EC5974 ;
+    background: rgba(236, 89, 116, 0.5);
+    border: 1px solid #EC5974;
 }
 
 .answer_correct {
-    background-color: #51B3660D;
+    background-color: rgba(81, 179, 102, 0.5);
     border: 1px solid #51B366 ;
 }
 

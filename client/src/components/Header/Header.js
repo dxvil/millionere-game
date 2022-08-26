@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from "react";
 
-export const Header = ({size, text}) => {
-  
+export const Header = ({key, size, text}) => {
     if(size === 'mid') {
         return(
-            <h3 className="header header_mid">{text}</h3>
+            <h3 key={key} className="header header_mid">{text}</h3>
         )
     }
 

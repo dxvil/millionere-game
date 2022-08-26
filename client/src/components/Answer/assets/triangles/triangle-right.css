@@ -31,13 +31,24 @@
     z-index: 7;
     content: "";
     border: 32px solid transparent;
-    border-left: 35px solid rgb(255, 255, 255);
+    border-left: 35px solid var(--main-bg-color);
     position: absolute;
     right: -134.5px;
     top: -32px;
     width: 105px;
 }
 
+.answer_default-right:after {
+    display: block;
+    z-index: 67;
+    content: "";
+    border: 32px solid transparent;
+    border-left: 35px solid #fff !important;
+    position: absolute;
+    right: -134.5px;
+    top: -32px;
+    width: 105px;
+}
 
 .triangle-right-line {
     position: absolute;
@@ -169,7 +180,7 @@
     z-index: 18;
     content: "";
     border: 23px solid transparent;
-    border-left: 34px solid #2869E866;
+    border-left: 34px solid rgba(40, 105, 232, 0.4);
     position: absolute;
     right: -52.5px;
     top: -23px;
@@ -186,7 +197,7 @@
     z-index: 20;
     content: "";
     border: 32px solid transparent;
-    border-left: 35px solid #2869E866;
+    border-left: 35px solid rgba(40, 105, 232, 0.4);
     position: absolute;
     left: -37.5px;
     top: -32px;
@@ -207,7 +218,7 @@
     z-index: 16;
     content: "";
     border: 23px solid transparent;
-    border-left: 34px solid #EC59740D;
+    border-left: 34px solid rgba(236, 89, 116, 0.5);
     position: absolute;
     left: -35px;
     top: -23px;
@@ -224,7 +235,7 @@
     z-index: 20;
     content: "";
     border: 32px solid transparent;
-    border-left: 35px solid #EC59740D;
+    border-left: 35px solid rgba(236, 89, 116, 0.5);
     position: absolute;
     left: -37.5px;
     top: -32px;
@@ -242,7 +253,7 @@
     z-index: 14;
     content: "";
     border: 23px solid transparent;
-    border-left: 34px solid #51B3660D;
+    border-left: 34px solid rgba(81, 179, 102, 0.5);
     position: absolute;
     left: -35px;
     top: -23px;
@@ -264,7 +275,7 @@
     z-index: 20;
     content: "";
     border: 32px solid transparent;
-    border-left: 35px solid #51B3660D;
+    border-left: 35px solid rgba(81, 179, 102, 0.5);
     position: absolute;
     left: -37.5px;
     top: -32px;

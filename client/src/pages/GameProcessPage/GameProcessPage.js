@@ -1,60 +1,37 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import data from '../../data/questions.json'
 import levels from '../../data/levels.json'
 import {Answer} from '../../components/Answer/Answer'
-import {Header} from '../../components/Header/Header'
+import {CurrentQuestion} from './CurrentQuestion'
 import "./game-process-page.css"
+import {delay} from '../../helpers/delay'
 
 const getQuestions = () => {
-    return data;
+    return new Promise((resolve, reject) => {
+        resolve(data)
+    })
 }
 
 const getLevels = () => {
-    return levels;
-}
-const renderAnswer = (data, level, onSelectAnswer, state, indexOfState, disabled) => {
-    if(data && Array.isArray(data) && data.length > 0) {
-        return data[level].content.map((text, i) => {
-            if(indexOfState === i){
-                return(
-                    <Answer 
-                    disabled={disabled}
-                    onSelectAnswer={onSelectAnswer}
-                    question={text}
-                    position={i} 
-                    size="standart"
-                    state={state}
-                    />
-                )
-            }
-            return(
-                <Answer 
-                disabled={disabled}
-                onSelectAnswer={onSelectAnswer}
-                question={text}
-                position={i} 
-                size="standart"
-                state={state && indexOfState && indexOfState === i ? state : "default"}
-                />
-            )
-        })
-    }
-    return null;
+    return new Promise((resolve, reject) => {
+        resolve(levels)
+    })
 }
 
 const renderLevels = (levels, userMoney) => {
     if(levels && Array.isArray(levels) && levels.length > 0) {
-        return levels.sort((a, b) => 
-        ((+b.replace("$", "").replaceAll(",", "")) - (+a.replace("$", "").replaceAll(",", "")))
-        ).map((lvl, i) => {
+        return [...levels].reverse().map((lvl, i) => {
             let state = checkState(levels, userMoney, lvl)
             return(
-                <Answer 
+                <div key={lvl}>
+                <Answer
                 sum={lvl}
                 position=""
                 size="small"
                 state={state}
                 />
+                </div>
+               
             )
         })
     }
@@ -64,88 +41,112 @@ const renderLevels = (levels, userMoney) => {
 const checkState = (levels, activeLevel, level) => {
     let indexOfActiveLevel = levels.indexOf(activeLevel)
     let indexOfLevel = levels.indexOf(level)
+
     if(indexOfActiveLevel === indexOfLevel) {
         return "active"
     }
-    if(indexOfActiveLevel < indexOfLevel) {
+    if(indexOfActiveLevel > indexOfLevel) {
         return "inactive"
     } 
-    if(indexOfActiveLevel > indexOfLevel) {
+    if(indexOfActiveLevel < indexOfLevel) {
         return "next"
     }
 }
-export const GameProcessPage = () => {
-    const [questions, setQuestions] = useState([])
-    const [levels, setLevels] = useState([])
+export const GameProcessPage = ({setScore, gameEnd, setGameEnd}) => {
+    const [questions, setQuestions] = useState(null)
+    const [levels, setLevels] = useState(null)
     const [gameLevel, setGameLevel] = useState(0)
-    const [currentQuestion, setCurrentQuestion] = useState("")
-    const [userMoney, setUserMoney] = useState()
-    const [correctAnswers, setCorrectAnswers] = useState()
-    const [selectedAnswers, setSelectedAnswers] = useState()
-    const [answerState, setAnswerState] = useState()
-    const [disabled, setDisabled] = useState(false)
-    useEffect(() => {
-        let ques = getQuestions();
-        setQuestions(ques.questions)
-    }, [])
+    const [currentGameState, setCurrentGameState] = useState(null)
+    const [userMoney, setUserMoney] = useState(null)
+    const [selectedAnswers, setSelectedAnswers] = useState(null)
 
     useEffect(() => {
-        let lvls = getLevels()
-        setLevels(lvls.levels)
-    }, [])
+        setScore(userMoney)
+    }, [userMoney])
 
     useEffect(() => {
-        if(questions && questions.length > 0) {
-            setCurrentQuestion(questions[gameLevel].question)
+        if(levels && levels.length !== 0) {
+            setGameLevel(0)
+            setUserMoney(levels[0])
         }
-    }, [questions])
-
-  useEffect(() => {
-        if(questions && questions.length > 0) {
-            setCorrectAnswers(questions[gameLevel].correct)
-        }
-    }, [questions])
-
-    useEffect(() => {
-        if(levels && levels.length > 0) {
-            setUserMoney(levels[gameLevel])
-        }
+        
     }, [levels])
 
-    const onSelectAnswer = (answer) => {
-        return setSelectedAnswers(answer);
-    }
-
-    const onAnswerChecked = (state) => {
-        setTimeout(() => {
-            setAnswerState(state)
-        }, 500);
-    }
-   
     useEffect(() => {
-        if(correctAnswers === selectedAnswers) {
-           onAnswerChecked("correct")
-        } else {
-            onAnswerChecked("wrong")
+        getQuestions().then((ques) => {
+            setQuestions(ques.questions)
+        })
+    }, [])
+
+    useEffect(() => {
+        getLevels().then((lvls) => {
+            setLevels(lvls.levels)
+        })
+    }, [])
+
+    useEffect(() => {
+        if(questions && !currentGameState) {
+            setCurrentGameState({...questions[0]})
+        }
+    }, [questions])
+
+    useEffect(() => {
+        if(levels && questions) {
+            setUserMoney(levels[gameLevel])
+            setCurrentGameState(questions[gameLevel])
+        }
+       
+    }, [gameLevel])
+
+        useEffect(() => {
+            if(gameEnd){
+                setGameLevel(0)
+                setSelectedAnswers()
+                setCurrentGameState()
+            }
+        }, [gameEnd])
+
+        const onSelectAnswer = (answer) => {
+            setSelectedAnswers(answer);
         }
 
-        return () => {
-            clearTimeout(onAnswerChecked)
-        }
-    }, [selectedAnswers])
+        useEffect(() => {
+            if(currentGameState && selectedAnswers >= 0 && (currentGameState.correct === selectedAnswers)) {
+                setSelectedAnswers(null)
+                delay(5000, setGameLevel(gameLevel + 1))
+            } else if(currentGameState && selectedAnswers >= 0  && (currentGameState.correct !== selectedAnswers)){
+                setGameEnd(true)
+            }
+
+            return () => {
+                clearTimeout(delay)
+            }
+        }, [selectedAnswers])
+
 
     return(
         <div className="game-process-page">
         <div className="game-process-page-wrapper">
-        <div className="game-process-page-question">
-            {currentQuestion && <Header size="mid" text={currentQuestion} />}
-        </div>
+        <CurrentQuestion currentQuestion={questions && questions[gameLevel] && questions[gameLevel].question} />
         <div className="game-process-page-answers">
-            {renderAnswer(questions, gameLevel, onSelectAnswer, answerState, selectedAnswers, disabled)}
+            {questions && questions[gameLevel]?.content.map((text, i) => {
+            return(
+                <Answer
+                key={i}
+                selectedAnswers={selectedAnswers}
+                correctAnswer={currentGameState?.correct}
+                onSelectAnswer={onSelectAnswer}
+                question={text}
+                position={i}
+                size="standart"
+                state={"default"}
+                />
+            )}
+            )}
         </div>
         </div>
         <div className="game-process-page-levels">
-        {userMoney && renderLevels(levels, userMoney)}
+        {renderLevels(levels, userMoney)}
         </div>
         </div>
     )

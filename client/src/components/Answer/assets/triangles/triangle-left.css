@@ -18,8 +18,6 @@
     width: 30px;
 }
 
-
-
 .answer.answer_next:hover .answer-triangle__left_small {
     border-right: 33px solid #D0D0D8;
 }
@@ -93,13 +91,36 @@
     z-index: 9;
     content: "";
     border: 32px solid transparent;
-    border-right: 35px solid rgb(255, 255, 255);
+    border-right: 35px solid var(--main-bg-color);
     position: absolute;
     left: -134.5px;
     top: -32px;
     width: 105px;
 }
 
+.answer_default-left:after {
+    display: block;
+    z-index: 34;
+    content: "";
+    border: 32px solid transparent;
+    border-right: 35px solid #fff !important;
+    position: absolute;
+    left: -134.5px;
+    top: -32px;
+    width: 105px;
+}
+
+.answer-triangle__left_standart:after {
+    display: block;
+    z-index: 9;
+    content: "";
+    border: 32px solid transparent;
+    border-right: 35px solid var(--main-bg-color);
+    position: absolute;
+    left: -134.5px;
+    top: -32px;
+    width: 105px;
+}
 
 .triangle-left-line-answer {
     position: absolute;
@@ -160,7 +181,7 @@
     z-index: 15;
     content: "";
     border: 23px solid transparent;
-    border-right: 34px solid #51B3660D;
+    border-right: 34px solid rgba(81, 179, 102, 0.5);
     position: absolute;
     right: -35px;
     top: -23px;
@@ -177,7 +198,7 @@
     z-index: 21;
     content: "";
     border: 32px solid transparent;
-    border-right: 35px solid #51B3660D;
+    border-right: 35px solid rgba(81, 179, 102, 0.5);
     position: absolute;
     left: -134.5px;
     top: -32px;
@@ -194,7 +215,7 @@
     z-index: 17;
     content: "";
     border: 23px solid transparent;
-    border-right: 34px solid #EC59740D;
+    border-right: 34px solid #E5E5E5;
     position: absolute;
     right: -35px;
     top: -23px;
@@ -211,7 +232,7 @@
     z-index: 21;
     content: "";
     border: 32px solid transparent;
-    border-right: 35px solid #EC59740D;
+    border-right: 35px solid rgba(236, 89, 116, 0.5);
     position: absolute;
     left: -134.5px;
     top: -32px;
@@ -228,7 +249,7 @@
     z-index: 19;
     content: "";
     border: 23px solid transparent;
-    border-right: 34px solid #2869E866;
+    border-right: 34px solid rgba(40, 105, 232, 0.4);
     position: absolute;
     right: -35px;
     top: -23px;
@@ -245,7 +266,7 @@
     z-index: 21;
     content: "";
     border: 32px solid transparent;
-    border-right: 35px solid #2869E866;
+    border-right: 35px solid rgba(40, 105, 232, 0.4);
     position: absolute;
     left: -134.5px;
     top: -32px;

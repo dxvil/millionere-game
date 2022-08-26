@@ -1,7 +1,12 @@
 import React from "react"
 import './game-button.css'
-export const GameBtn = ({text}) => {
+export const GameBtn = ({text, setGameEnd, setStartGame}) => {
     return(
-        <button className="game-btn">{text}</button>
+        <button className="game-btn" onClick={() => {
+            setStartGame(true)
+            setGameEnd(false)
+        }}>
+            {text}
+        </button>
     )
 }
