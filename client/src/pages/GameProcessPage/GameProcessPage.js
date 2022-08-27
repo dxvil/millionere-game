@@ -6,7 +6,9 @@ import {CurrentQuestion} from './CurrentQuestion'
 import "./game-process-page.css"
 import {delay} from '../../helpers/delay'
 import {contains} from '../../helpers/contains'
-
+import {useWindowSize} from '../../hooks/useWindowSize'
+import { CloseBtn } from "../../components/Mobile/CloseBtn";
+import { MenuBtn } from "../../components/Mobile/MenuBtn";
 const getQuestions = () => {
     return new Promise((resolve, reject) => {
         resolve(data)
@@ -21,7 +23,7 @@ const getLevels = () => {
 
 const renderLevels = (levels, userMoney) => {
     if(levels && Array.isArray(levels) && levels.length > 0) {
-        return [...levels].reverse().map((lvl, i) => {
+        return [...levels].reverse().map((lvl) => {
             let state = checkState(levels, userMoney, lvl)
             return(
                 <div key={lvl}>
@@ -60,10 +62,26 @@ export const GameProcessPage = ({setScore, gameEnd, setGameEnd}) => {
     const [currentGameState, setCurrentGameState] = useState(null)
     const [userMoney, setUserMoney] = useState(null)
     const [selectedAnswers, setSelectedAnswers] = useState([])
-
+    const windowSize = useWindowSize();
+    const [isVisibleLevels, setIsVisibleLevels] = useState(true)
+    const [isVisibleMenu, setIsVisibleMenu] = useState(false)
+    
     useEffect(() => {
         setScore(userMoney)
     }, [userMoney])
+
+    useEffect(()=> {
+        if(windowSize.width > 768) {
+            setIsVisibleLevels(true)
+        } else {
+            setIsVisibleLevels(false)
+        }
+        if(windowSize.width < 768) {
+            setIsVisibleMenu(true)
+        } else {
+            setIsVisibleMenu(false)
+        }
+    }, [windowSize])
 
     useEffect(() => {
         if(levels && levels.length !== 0) {
@@ -127,7 +145,7 @@ export const GameProcessPage = ({setScore, gameEnd, setGameEnd}) => {
                 setGameEnd(true)
             }
 
-            if((selectedAnswers.length !== 0) && currentGameState) {
+            if((selectedAnswers && selectedAnswers.length !== 0) && currentGameState) {
                 let checkedAns = checkAnswer(selectedAnswers, currentGameState.correct)
                 if(checkedAns !== "cont" && checkedAns) {
                     setSelectedAnswers([])
@@ -147,7 +165,8 @@ export const GameProcessPage = ({setScore, gameEnd, setGameEnd}) => {
         <div className="game-process-page">
         <div className="game-process-page-wrapper">
         <CurrentQuestion currentQuestion={questions && questions[gameLevel] && questions[gameLevel].question} />
-        <div className="game-process-page-answers">
+        <div className="game-process-page-answers" style={{display: isVisibleLevels && windowSize.width < 768 && "none"}}>
+            {isVisibleMenu && <MenuBtn setIsVisibleLevels={setIsVisibleLevels} />}
             {questions && questions[gameLevel]?.content.map((text, i) => {
             return(
                 <Answer
@@ -164,7 +183,8 @@ export const GameProcessPage = ({setScore, gameEnd, setGameEnd}) => {
             )}
         </div>
         </div>
-        <div className="game-process-page-levels">
+        <div className="game-process-page-levels" style={{display: !isVisibleLevels && "none"}}>
+        <CloseBtn setIsVisibleLevels={setIsVisibleLevels} />
         {renderLevels(levels, userMoney)}
         </div>
         </div>

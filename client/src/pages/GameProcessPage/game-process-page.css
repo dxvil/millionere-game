@@ -20,7 +20,7 @@
 }
 
 .game-process-page-answers {
-    width: 80%;
+    width: 90%;
     display: flex;
     flex-wrap: wrap;
     margin: 9em 0 0 0;
@@ -34,8 +34,106 @@
     text-align: center;
     width: 30%;
     max-width: 30%;
+    overflow: hidden auto;
 }
 .game-process-page-levels .answer {
     transform: translateX(100px);
     margin: 2px 0 5px 0;
+}
+
+.game-process-page-levels_close-btn {
+    display: none;
+    cursor: pointer;
+}
+.game-process-page-levels_menu-btn {
+    display: inline-block;
+    cursor: pointer;
+}
+.bar1, .bar2, .bar3 {
+    width: 35px;
+    height: 5px;
+    background-color: #000;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+@media screen and (min-width: 1440px) {
+    .game-process-page-wrapper {
+        justify-content: flex-start;
+        font-size: 1.3em;
+    }
+    .game-process-page-question {
+        font-size: 1.5em;
+    }
+    .game-process-page-wrapper .answer {
+        width: 300px;
+    }
+    .game-process-page-levels .answer{
+        width: 74%;
+        margin: 40px 0 5px 0;
+    }
+}
+
+/* //mobile */
+@media screen and (max-width: 1000px) and (min-width: 768px) {
+    .game-process-page-wrapper {
+        width: 50%;
+    }
+    .game-process-page-levels {
+        width: 50%;
+        max-width: 50%;
+    }
+    .game-process-page-answers {
+        overflow: hidden auto;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .game-process-page-wrapper {
+        position: relative;
+        width: 100%;
+        padding: 0;
+        align-items: center;
+    }
+    .game-process-page-levels {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        max-width: 100%;
+        padding: 7em 0 0 0;
+        height: 100vh;
+        background-color: var(--main-bg-color);
+    }
+    .game-process-page-levels_close-btn {
+        display: inline-block;
+        font-size: 3em;
+        position: absolute;
+        top: 0;
+        right: 15px;
+        border: none;
+        background-color: inherit;
+    }
+    .game-process-page-levels_menu-btn {
+        display: inline-block;
+        font-size: 2em;
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        border: none;
+        background-color: inherit;
+    }
+    .game-process-page-answers {
+        width: 100%;
+        overflow: hidden auto;
+    }
+    .game-process-page-answers .answer {
+        width: 100%;
+    }
+    .game-process-page-levels .answer {
+        width: 50%;
+    }
+    .game-process-page-question {
+        transform: translateY(130px);
+        width: 50%;
+    }
 }
