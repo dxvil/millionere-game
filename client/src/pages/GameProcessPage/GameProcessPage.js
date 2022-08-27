@@ -5,6 +5,7 @@ import {Answer} from '../../components/Answer/Answer'
 import {CurrentQuestion} from './CurrentQuestion'
 import "./game-process-page.css"
 import {delay} from '../../helpers/delay'
+import {contains} from '../../helpers/contains'
 
 const getQuestions = () => {
     return new Promise((resolve, reject) => {
@@ -58,7 +59,7 @@ export const GameProcessPage = ({setScore, gameEnd, setGameEnd}) => {
     const [gameLevel, setGameLevel] = useState(0)
     const [currentGameState, setCurrentGameState] = useState(null)
     const [userMoney, setUserMoney] = useState(null)
-    const [selectedAnswers, setSelectedAnswers] = useState(null)
+    const [selectedAnswers, setSelectedAnswers] = useState([])
 
     useEffect(() => {
         setScore(userMoney)
@@ -107,15 +108,33 @@ export const GameProcessPage = ({setScore, gameEnd, setGameEnd}) => {
         }, [gameEnd])
 
         const onSelectAnswer = (answer) => {
-            setSelectedAnswers(answer);
+            setSelectedAnswers((sA) => [...sA, answer]);
+        }
+
+        const checkAnswer = (selectedAns, ans) => {
+            let sA = selectedAns.toString().split(",")
+            let a = ans.toString().split(",")
+            if(sA.length === a.length) {
+                return contains(sA, a)
+            } else if(sA.length < a.length){
+                return 'cont';
+            }
+            return;
         }
 
         useEffect(() => {
-            if(currentGameState && selectedAnswers >= 0 && (currentGameState.correct === selectedAnswers)) {
-                setSelectedAnswers(null)
-                delay(5000, setGameLevel(gameLevel + 1))
-            } else if(currentGameState && selectedAnswers >= 0  && (currentGameState.correct !== selectedAnswers)){
+            if(levels && (gameLevel === levels.length)) {
                 setGameEnd(true)
+            }
+
+            if((selectedAnswers.length !== 0) && currentGameState) {
+                let checkedAns = checkAnswer(selectedAnswers, currentGameState.correct)
+                if(checkedAns !== "cont" && checkedAns) {
+                    setSelectedAnswers([])
+                    delay(6500, setGameLevel(gameLevel + 1))
+                } else if(!checkedAns) {
+                    delay(6500, setGameEnd(true))
+                }
             }
 
             return () => {

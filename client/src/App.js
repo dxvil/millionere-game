@@ -9,8 +9,9 @@ export  const App = () => {
     const [gameEnd, setGameEnd] = useState(false)
     
     return(
+        // setGameEnd={setGameEnd}
         <>
-        {!startGame && !gameEnd && <GamePage setGameEnd={setGameEnd} setStartGame={setStartGame}
+        {!startGame && !gameEnd && <GamePage  setStartGame={setStartGame}
         btnTxt="Start" headerText="Who wants to be a millionaire?" />}
         {!gameEnd && startGame && <GameProcessPage gameEnd={gameEnd} setGameEnd={setGameEnd} setScore={setScore}/>}
         {gameEnd && <GamePage setGameEnd={setGameEnd} setStartGame={setStartGame}

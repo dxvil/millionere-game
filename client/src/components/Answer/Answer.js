@@ -40,15 +40,16 @@ const sumStates = ["active", "inactive", "next"]
 
 const onClickAnswer = (key, correctAnswer, onSelectAnswer, sumStates, state, setAnswerStateClass, setAnswerState) => {
     btnFocus(sumStates, state, setAnswerStateClass, setAnswerState)
-    
-    setTimeout(() => {
-        setAnswerStateClass(onStateClass(key === correctAnswer ? "correct" : "wrong"))
-        setAnswerState(key === correctAnswer ? "correct" : "wrong")
-    }, 3000)
-
     setTimeout(() => {
         onSelectAnswer(key)
     }, [5000])
+    setTimeout(() => {
+        let cond = correctAnswer.toString().split(",").includes(key.toString());
+        setAnswerStateClass(onStateClass(cond ? "correct" : "wrong"))
+        setAnswerState(cond ? "correct" : "wrong")
+    }, 3000)
+
+
 }
 
 const btnFocus = (sumStates, state, setAnswerStateClass, setAnswerState) => {
@@ -226,7 +227,7 @@ export const Answer = ({sum, question, position, size, state, selectedAnswers, c
     const [linePositionRight, lineStyleRight, triangleStyleRight, triangleStateStyleRight] = answerState && answerTringleState[size]["right"][answerState]
     
     useEffect(() => {
-    if(selectedAnswers === null) {
+    if(selectedAnswers && selectedAnswers.length === 0) {
         setAnswerState("default")
         setAnswerStateClass("")
     }

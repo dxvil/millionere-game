@@ -4,7 +4,7 @@ export const GameBtn = ({text, setGameEnd, setStartGame}) => {
     return(
         <button className="game-btn" onClick={() => {
             setStartGame(true)
-            setGameEnd(false)
+            setGameEnd && setGameEnd(false)
         }}>
             {text}
         </button>
