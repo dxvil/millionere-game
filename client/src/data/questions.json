@@ -1,15 +1,5 @@
 {
     "questions": [
-        {
-            "question" : "What are the three primary colors?",
-            "content" : [
-                "Bla, Bla",
-                "Magenta, Magenta",
-                "salmon, salmon, salmon",
-                "White, grey, black"
-            ],
-            "correct" : [0, 1, 2]
-        },
     {
     "question" : "In the U.S., if it's not Daylight Saving Time, it's what?",
     "content" : [
@@ -129,16 +119,6 @@
             "White, grey, black"
         ],
         "correct" : 0
-    },
-    {
-        "question" : "What are the three primary colors?",
-        "content" : [
-            "Bla, Bla",
-            "Magenta, Magenta",
-            "salmon, salmon, salmon",
-            "White, grey, black"
-        ],
-        "correct" : [0, 1, 2]
     }
 ]
 }

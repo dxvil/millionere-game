@@ -1,37 +1,44 @@
-import React, {useState, useEffect, useRef} from "react";
+import React, {useState, useEffect} from "react";
 import data from '../../data/questions.json'
 import levels from '../../data/levels.json'
-import {Answer} from '../../components/Answer/Answer'
-import {CurrentQuestion} from './CurrentQuestion'
+import Answer from '../../components/Answer/Answer'
+import CurrentQuestion from './CurrentQuestion'
 import "./game-process-page.css"
-import {delay} from '../../helpers/delay'
+import delay from '../../helpers/delay'
 import {contains} from '../../helpers/contains'
-import {useWindowSize} from '../../hooks/useWindowSize'
-import { CloseBtn } from "../../components/Mobile/CloseBtn";
-import { MenuBtn } from "../../components/Mobile/MenuBtn";
-const getQuestions = () => {
+import useWindowSize from '../../hooks/useWindowSize'
+import CloseBtn from "../../components/Mobile/CloseBtn";
+import MenuBtn from "../../components/Mobile/MenuBtn";
+import {Levels, Questions} from '../../types/types'
+import {Question, GameProcessPage, WindowSize} from '../../interfaces/index'
+
+const getQuestions = (): Promise<Questions>=> {
     return new Promise((resolve, reject) => {
         resolve(data)
     })
 }
 
-const getLevels = () => {
+const getLevels = (): Promise<Levels> => {
     return new Promise((resolve, reject) => {
         resolve(levels)
     })
 }
 
-const renderLevels = (levels, userMoney) => {
+const renderLevels = (levels: string[], userMoney: string): JSX.Element[] | null => {
     if(levels && Array.isArray(levels) && levels.length > 0) {
-        return [...levels].reverse().map((lvl) => {
+        return [...levels].reverse().map((lvl, i) => {
             let state = checkState(levels, userMoney, lvl)
             return(
                 <div key={lvl}>
                 <Answer
                 sum={lvl}
-                position=""
+                position={i}
                 size="small"
                 state={state}
+                selectedAnswers={null}
+                onSelectAnswer={null}
+                question={null}
+                correctAnswer={null}
                 />
                 </div>
                
@@ -41,7 +48,7 @@ const renderLevels = (levels, userMoney) => {
     return null;
 }
 
-const checkState = (levels, activeLevel, level) => {
+const checkState = (levels: string[], activeLevel: string, level: string): string => {
     let indexOfActiveLevel = levels.indexOf(activeLevel)
     let indexOfLevel = levels.indexOf(level)
 
@@ -55,16 +62,18 @@ const checkState = (levels, activeLevel, level) => {
         return "next"
     }
 }
-export const GameProcessPage = ({setScore, gameEnd, setGameEnd}) => {
-    const [questions, setQuestions] = useState(null)
-    const [levels, setLevels] = useState(null)
-    const [gameLevel, setGameLevel] = useState(0)
-    const [currentGameState, setCurrentGameState] = useState(null)
-    const [userMoney, setUserMoney] = useState(null)
-    const [selectedAnswers, setSelectedAnswers] = useState([])
-    const windowSize = useWindowSize();
-    const [isVisibleLevels, setIsVisibleLevels] = useState(true)
-    const [isVisibleMenu, setIsVisibleMenu] = useState(false)
+
+
+export default function GameProcessPage({setScore, gameEnd, setGameEnd}: GameProcessPage) {
+    const [questions, setQuestions] = useState<Question[] | null>(null)
+    const [levels, setLevels] = useState<string[] | null>(null)
+    const [gameLevel, setGameLevel] = useState<number>(0)
+    const [currentGameState, setCurrentGameState] = useState<Question | null>(null)
+    const [userMoney, setUserMoney] = useState<string>("")
+    const [selectedAnswers, setSelectedAnswers] = useState<number[] | []>([])
+    const windowSize: WindowSize  = useWindowSize();
+    const [isVisibleLevels, setIsVisibleLevels] = useState<boolean>(true)
+    const [isVisibleMenu, setIsVisibleMenu] = useState<boolean>(false)
     
     useEffect(() => {
         setScore(userMoney)
@@ -120,16 +129,16 @@ export const GameProcessPage = ({setScore, gameEnd, setGameEnd}) => {
         useEffect(() => {
             if(gameEnd){
                 setGameLevel(0)
-                setSelectedAnswers()
-                setCurrentGameState()
+                setSelectedAnswers([])
+                setCurrentGameState(null)
             }
         }, [gameEnd])
 
-        const onSelectAnswer = (answer) => {
+        const onSelectAnswer = (answer: number) => {
             setSelectedAnswers((sA) => [...sA, answer]);
         }
 
-        const checkAnswer = (selectedAns, ans) => {
+        const checkAnswer = (selectedAns: number[] | [], ans: number[] | number) => {
             let sA = selectedAns.toString().split(",")
             let a = ans.toString().split(",")
             if(sA.length === a.length) {
@@ -144,22 +153,18 @@ export const GameProcessPage = ({setScore, gameEnd, setGameEnd}) => {
             if(levels && (gameLevel === levels.length)) {
                 setGameEnd(true)
             }
-
-            if((selectedAnswers && selectedAnswers.length !== 0) && currentGameState) {
+            
+            if(selectedAnswers && selectedAnswers.length !== 0 && currentGameState) {
                 let checkedAns = checkAnswer(selectedAnswers, currentGameState.correct)
                 if(checkedAns !== "cont" && checkedAns) {
                     setSelectedAnswers([])
-                    delay(6500, setGameLevel(gameLevel + 1))
+                    setGameLevel(gameLevel + 1)
                 } else if(!checkedAns) {
-                    delay(6500, setGameEnd(true))
+                    delay(6500, setGameEnd(true), null)
                 }
             }
-
-            return () => {
-                clearTimeout(delay)
-            }
+            
         }, [selectedAnswers])
-
 
     return(
         <div className="game-process-page">
@@ -170,6 +175,7 @@ export const GameProcessPage = ({setScore, gameEnd, setGameEnd}) => {
             {questions && questions[gameLevel]?.content.map((text, i) => {
             return(
                 <Answer
+                sum=""
                 key={i}
                 selectedAnswers={selectedAnswers}
                 correctAnswer={currentGameState?.correct}
