@@ -3,7 +3,6 @@ The task is provided by [Siema](https://siema.com.ua/)
 
 Comments:
 - Personally I prefer not to have an a default import but it was required use eslint/airbnb in the task
-- The first time tried a Typescript (__amazing!__)
 
 ### Installation
 Install the dependencies and devDependencies and start the server.
