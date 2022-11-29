@@ -1,5 +1,6 @@
 ## Game "Who wants to become a millionaire"
 The task is provided by [Siema](https://siema.com.ua/)
+[See a result](https://millionere-game.vercel.app/)
 
 Comments:
 - Personally I prefer not to have an a default import but it was required use eslint/airbnb in the task
