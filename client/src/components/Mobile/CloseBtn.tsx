@@ -1,5 +1,5 @@
 import React from 'react';
-import {CloseBtn} from '../../interfaces/index'
+import {CloseBtn} from '../../types/interfaces'
 
 export default function CloseBtn({ setIsVisibleLevels }: CloseBtn) {
   return (

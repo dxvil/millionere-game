@@ -10,7 +10,7 @@ import useWindowSize from '../../hooks/useWindowSize'
 import CloseBtn from "../../components/Mobile/CloseBtn";
 import MenuBtn from "../../components/Mobile/MenuBtn";
 import {Levels, Questions} from '../../types/types'
-import {Question, GameProcessPage, WindowSize} from '../../interfaces/index'
+import {Question, GameProcessPage, WindowSize} from '../../types/interfaces'
 
 const getQuestions = (): Promise<Questions>=> {
     return new Promise((resolve, reject) => {

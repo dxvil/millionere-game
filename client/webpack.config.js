@@ -16,7 +16,7 @@ module.exports = (env, argv) => {
   const isEnvProduction = argv.mode === 'production';
 
   return {
-    entry: `${PATHS.src}/index.tsx`,
+    entry: `./index.tsx`,
     output: {
       path: `${PATHS.dist}`,
       filename: './[name].[fullhash].min.js',

@@ -3,7 +3,8 @@ import './assets/index.css';
 import './assets/triangles/triangle-left.css';
 import './assets/triangles/triangle-right.css';
 import genKey from '../../helpers/genKey';
-import {AnswerTriangle, AnswerProps} from '../../interfaces/index'
+import {AnswerTriangle, AnswerProps, AnswerTriangleStates} from '../../types/interfaces'
+import { TriangleSmallLeft, TriangleSmallRight, TriangleStandartLeft, TriangleStandartRight } from './answerStyles';
 
 const LETTERS = ['A', 'B', 'C', 'D', 'E', 'F'];
 
@@ -71,25 +72,7 @@ const onClickAnswer = (
 
 
 
-interface AnswerTriangleStates {
-  selected: string[],
-  wrong: string[],
-  correct: string[],
-  inactive: string[],
-  active: string[],
-  next: string[],
-  default: string[]
-}
 
-interface AnswerTrinaglePosition {
-  left: AnswerTriangleStates,
-  right: AnswerTriangleStates
-}
-
-type AnswerTringle = {
-  small: AnswerTrinaglePosition,
-  standart: AnswerTrinaglePosition
-}
 
 export default function Answer({
   sum, question, position, size, state, selectedAnswers, correctAnswer, onSelectAnswer,
@@ -98,181 +81,20 @@ export default function Answer({
   const [answerSizeClass, setAnswerSizeClass] = useState<string>('answer_standart');
   const [answerStateClass, setAnswerStateClass] = useState<string>('');
   const [answerState, setAnswerState] = useState<string>(state);
-  const answerTringleState: any = {
-    small: {
-      left: {
-        selected: [
-          'triangle-left-line',
-          'triangle-left-line_selected',
-          'answer-triangle__left_small',
-          'answer-triangle__left_small_selected',
-        ],
-        wrong: [
-          'triangle-left-line',
-          'triangle-left-line_wrong',
-          'answer-triangle__left_small',
-          'answer-triangle__left_small_wrong',
-        ],
-        correct: [
-          'triangle-left-line',
-          'triangle-left-line_correct',
-          'answer-triangle__left_small',
-          'answer-triangle__left_small_correct',
-        ],
-        inactive: [
-          'triangle-left-line_prev',
-          'answer_inactive',
-          'answer-triangle__left_small',
-          '',
-        ],
-        active: [
-          'triangle-left-line_active',
-          '',
-          'answer-triangle__left_small',
-          '',
-        ],
-        next: [
-          'triangle-left-line_next',
-          'answer_next',
-          'answer-triangle__left_small',
-          '',
-        ],
-        default: [
-          'triangle-left-line',
-          '',
-          'answer-triangle__left_small',
-          '',
-        ],
-      },
-      right: {
-        selected: [
-          'triangle-right-line',
-          'triangle-right-line_selected',
-          'answer-triangle__right_small',
-          'answer-triangle__right_small_selected',
-        ],
-        wrong: [
-          'triangle-right-line',
-          'triangle-right-line_wrong',
-          'answer-triangle__right_small',
-          'answer-triangle__right_small_wrong',
-        ],
-        correct: [
-          'triangle-right-line',
-          'triangle-right-line_correct',
-          'answer-triangle__right_small',
-          'answer-triangle__right_small_correct',
-        ],
-        inactive: [
-          'triangle-right-line_inactive',
-          '',
-          'answer-triangle__right_small',
-          '',
-        ],
-        active: [
-          'triangle-right-line_active',
-          '',
-          'answer-triangle__right_small',
-          '',
-        ],
-        next: [
-          'triangle-right-line_next',
-          '',
-          'answer-triangle__right_small',
-          '',
-        ],
-        default: [
-          'triangle-right-line',
-          '',
-          'answer-triangle__right_small',
-          '',
-        ],
-      },
-    },
-    standart: {
-      left: {
-        selected: [
-          'triangle-left-line-answer_selected',
-          'triangle-left-line_standart_selected',
-          'answer-triangle__left_standart',
-          'answer-triangle__left_standart_selected',
-        ],
-        wrong: [
-          'triangle-left-line-answer_wrong',
-          'triangle-left-line_standart_wrong',
-          'answer-triangle__left_standart',
-          'answer-triangle__left_standart_wrong',
-        ],
-        correct: [
-          'triangle-left-line-answer_correct',
-          'triangle-left-line_standart_correct',
-          'answer-triangle__left_standart',
-          'answer-triangle__left_standart_correct',
-        ],
-        active: ["", "", "" ,""],
-        next: ["", "", "" ,""],
-        inactive: [
-          'triangle-left-line-answer',
-          '',
-          'answer-triangle__left_standart',
-          '',
-        ],
-        default: [
-          'triangle-left-line-answer',
-          '',
-          'answer-triangle__left_standart',
-          'answer_default-left',
-        ],
-      },
-      right: {
-        selected: [
-          'triangle-right-line-answer_selected',
-          'triangle-right-line_standart_selected',
-          'answer-triangle__right_standart',
-          'answer-triangle__right_standart_selected',
-        ],
-        wrong: [
-          'triangle-right-line-answer_wrong',
-          'triangle-right-line_standart_wrong',
-          'answer-triangle__right_standart',
-          'answer-triangle__right_standart_wrong',
-        ],
-        correct: [
-          'triangle-right-line-answer_correct',
-          'triangle-right-line_standart_correct',
-          'answer-triangle__right_standart',
-          'answer-triangle__right_standart_correct',
-        ],
-        active: ["", "", "" ,""],
-        next: ["", "", "" ,""],
-        inactive: [
-          'triangle-right-line-answer',
-          'triangle-right-line_standart',
-          '',
-          'answer-triangle__right_standart',
-          '',
-        ],
-        default: [
-          'triangle-right-line-answer',
-          '',
-          'answer-triangle__right_standart',
-          'answer_default-right',
-        ],
-      },
-    },
-  };
+  const answerTriangleLeft: AnswerTriangleStates = size === "standart" ? TriangleStandartLeft : TriangleSmallLeft;
+  const answerTriangleRight: AnswerTriangleStates = size === "standart" ? TriangleStandartRight : TriangleSmallRight;
   const [
     linePositionLeft,
     lineStyleLeft,
     triangleStyleLeft,
-    triangleStateLeft,
-  ] = answerState && answerTringleState[size].left[answerState];
+    triangleStateLeft
+  ] = answerTriangleLeft[answerState as keyof AnswerTriangleStates];
   const [
     linePositionRight,
     lineStyleRight,
     triangleStyleRight,
-    triangleStateStyleRight,
-  ]: [string, string, string, string] = answerState && answerTringleState[size].right[answerState];
+    triangleStateStyleRight
+  ] = answerTriangleRight[answerState as keyof AnswerTriangleStates];
 
   useEffect(() => {
     if (selectedAnswers && selectedAnswers.length === 0) {
@@ -309,7 +131,6 @@ export default function Answer({
     <button
       type="button"
       id="answer"
-      key={genKey()}
       onClick={() => {
         onClickAnswer(
           position,
@@ -354,11 +175,11 @@ function AnswerTriangle({
   triangleStyleState,
   triangleStateStyleState,
 }: AnswerTriangle) {
+
   return (
     <>
-      <div className={`${lineStyleState} ${linePositionState}`} key={genKey()} />
+      <div className={`${lineStyleState} ${linePositionState}`} />
       <div
-        key={genKey()}
         className={`answer-triangle ${triangleStyleState} ${triangleStateStyleState}`}
       />
     </>

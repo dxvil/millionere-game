@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from '../../components/Header/Header';
-import {CurrentQuestion} from '../../interfaces/index'
+import {CurrentQuestion} from '../../types/interfaces'
 
 export default function CurrentQuestion({ currentQuestion }: CurrentQuestion) {
   return (

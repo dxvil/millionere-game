@@ -1,5 +1,5 @@
 import React from 'react';
-import {MenuBtn} from '../../interfaces/index'
+import {MenuBtn} from '../../types/interfaces'
 
 export default function MenuBtn({ setIsVisibleLevels }: MenuBtn) {
   return (

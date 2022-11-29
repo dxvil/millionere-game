@@ -1,6 +1,6 @@
 import React from 'react';
 import './game-button.css';
-import {GameBtn} from '../../interfaces/index'
+import {GameBtn} from '../../types/interfaces'
 
 export default function GameBtn({ text, setGameEnd, setStartGame }: GameBtn) {
   return (

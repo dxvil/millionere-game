@@ -11,6 +11,17 @@ export interface AnswerTriangle {
     triangleStateStyleState: string
 }
 
+export interface AnswerTriangleStates {
+    selected: string[],
+    wrong: string[],
+    correct: string[],
+    inactive: string[],
+    active: string[],
+    next: string[],
+    default: string[]
+}
+  
+
 export interface AnswerProps  {
     sum: string,
     question: string | null,

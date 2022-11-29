@@ -1,5 +1,5 @@
 import React from 'react';
-import {Header} from '../../interfaces/index'
+import {Header} from '../../types/interfaces'
 
 
 export default function Header({ size, text }: Header) {

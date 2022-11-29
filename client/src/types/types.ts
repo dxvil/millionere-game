@@ -1,4 +1,4 @@
-import { Question } from'../interfaces/index'
+import { Question } from'./interfaces'
 
 export type Levels = {
     [levels: string]: string[]

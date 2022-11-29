@@ -3,7 +3,7 @@ import GameOkayComponent from '../../components/GameOkayComponent/GameOkayCompon
 import GameBtn from '../../components/GameBtn/GameBtn';
 import Header from '../../components/Header/Header';
 import './game-page.css';
-import {GamePage} from '../../interfaces/index'
+import {GamePage} from '../../types/interfaces'
 
 
 export default function GamePage({
